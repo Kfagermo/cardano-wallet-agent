@@ -23,4 +23,4 @@ COPY README.md SURVIVAL_PLAN.md DEPLOYMENT.md ./
 RUN mkdir -p reports data
 
 EXPOSE 8000
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 2"]
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
