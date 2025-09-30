@@ -9,7 +9,7 @@ AI-powered Cardano wallet risk assessment available on the [Masumi Network](http
 ### Via Sokosumi Marketplace (Recommended)
 The easiest way to use this service:
 - **Find it on**: https://www.sokosumi.com
-- **Price**: 0.05 ADA per wallet analysis
+- **Price**: 0.05 ADA or 0.05 USDM per wallet analysis
 - **Payment**: Automatic via Masumi
 
 ### Via Masumi Network (Agent-to-Agent)
