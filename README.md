@@ -85,10 +85,10 @@ See more examples in the `/examples` folder.
 
 ## Documentation
 
-- **[Agent Overview](docs/AGENT_OVERVIEW.md)** - Detailed service description
-- **[Terms of Use](docs/TERMS_OF_USE.md)** - Legal terms
-- **[Privacy Policy](docs/PRIVACY_POLICY.md)** - Privacy policy
-- **[Support](docs/SUPPORT.md)** - Get help
+- **[Overview](docs/overview.md)** - What this service does
+- **[Terms of Use](docs/terms.md)** - Legal terms
+- **[Privacy Policy](docs/privacy.md)** - Privacy policy
+- **[Support](docs/support.md)** - Get help
 
 ## Support
 
