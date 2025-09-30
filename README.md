@@ -1,9 +1,22 @@
 # Cardano Wallet Health & Risk Scoring Agent
 
-AI-powered Cardano wallet risk assessment service. Analyzes wallet addresses from multiple perspectives (security, DeFi, behavioral, compliance) and provides risk scores, health ratings, and actionable insights.
+**A Masumi Network Service**
 
-**Live Service**: https://cardano-wallet-agent-production.up.railway.app  
-**API Docs**: https://cardano-wallet-agent-production.up.railway.app/docs
+AI-powered Cardano wallet risk assessment available on the [Masumi Network](https://www.masumi.network) and [Sokosumi Marketplace](https://www.sokosumi.com). Analyzes wallet addresses from multiple perspectives (security, DeFi, behavioral, compliance) and provides risk scores, health ratings, and actionable insights.
+
+## 🌐 How to Use This Service
+
+### Via Sokosumi Marketplace (Recommended)
+- **Find it on**: https://www.sokosumi.com
+- **Price**: 0.05 ADA per wallet analysis
+- **Payment**: Automatic via Masumi
+
+### Via Masumi Network (Agent-to-Agent)
+- **Service URL**: https://cardano-wallet-agent-production.up.railway.app
+- **API Docs**: https://cardano-wallet-agent-production.up.railway.app/docs
+- **MIP-003 Compliant**: Full A2A integration
+
+**Note**: All requests require payment through Masumi Payment Service.
 
 ## Features
 
@@ -14,27 +27,33 @@ AI-powered Cardano wallet risk assessment service. Analyzes wallet addresses fro
 - ✅ **Fast & Cached**: Instant results for repeated queries
 - ✅ **Production Ready**: Deployed on Railway with 99%+ uptime
 
-## Quick Start
+## For Developers
 
-### Test the API
+### Fork & Deploy Your Own
+
+Want to create your own version? See our guides:
+
+- **[Deployment Guide](docs/RAILWAY_DEPLOYMENT.md)** - Deploy to Railway
+- **[Environment Variables](docs/ENV_TEMPLATE.md)** - Configuration reference
+- **[AI Setup](docs/AI_ANALYSIS_GUIDE.md)** - Configure AI analysis
+
+### Quick Local Development
 
 ```bash
-# Check availability
-curl https://cardano-wallet-agent-production.up.railway.app/availability
+git clone https://github.com/Kfagermo/cardano-wallet-agent.git
+cd cardano-wallet-agent
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
 
-# Get input schema
-curl https://cardano-wallet-agent-production.up.railway.app/input_schema
+# Create .env for local testing
+echo MASUMI_BYPASS_PAYMENTS=true > .env
+echo NETWORK=preprod >> .env
 
-# Analyze a wallet
-curl -X POST https://cardano-wallet-agent-production.up.railway.app/start_job \
-  -H "Content-Type: application/json" \
-  -d '{
-    "input_data": [
-      {"key": "address", "value": "addr1qx2kd28nq8ac5prwg32hhvudlwggpgfp8utlyqxu6wqgz62f79qsdmm5dsknt9ecr5w468r9ey0fxwkdrwh08ly3tu9sy0f4qd"},
-      {"key": "network", "value": "mainnet"}
-    ]
-  }'
+uvicorn src.main:app --reload --port 8000
 ```
+
+Visit http://localhost:8000/docs for API documentation.
 
 ## Project Structure
 
