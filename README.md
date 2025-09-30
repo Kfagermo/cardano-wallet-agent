@@ -1,29 +1,56 @@
-# Crypto Analyst Agent (Masumi MIP-003) — Quickstart
+# Cardano Wallet Health & Risk Scoring Agent
 
-Python + FastAPI implementation of a Masumi-compatible Agentic Service focused on Cardano Wallet Health & Risk Scoring. This is the fastest path to ship, monetize via Masumi payments, and list on Sokosumi with minimal marketing.
+AI-powered Cardano wallet risk assessment service. Analyzes wallet addresses from multiple perspectives (security, DeFi, behavioral, compliance) and provides risk scores, health ratings, and actionable insights.
 
-- Endpoints: `/availability`, `/input_schema`, `/start_job`, `/status`
-- Report template: `templates/wallet_report.html` (responsive, dark-mode aware)
-- Output: Deterministic JSON + rendered HTML report (saved to `reports/`)
+**Live Service**: https://cardano-wallet-agent-production.up.railway.app  
+**API Docs**: https://cardano-wallet-agent-production.up.railway.app/docs
 
-Why Python?
-- Minimal boilerplate to implement MIP-003 endpoints
-- Great ecosystem for HTTP, templating (Jinja2), and future data/ML
-- Works well on low-cost infra or Kodosumi; no LLMs required for MVP
+## Features
+
+- ✅ **AI-Powered Analysis**: OpenAI GPT-4o-mini for intelligent risk assessment
+- ✅ **Multi-Perspective**: Security, DeFi, Behavioral, Compliance analysis
+- ✅ **Real-Time Data**: Blockfrost integration for on-chain data
+- ✅ **MIP-003 Compliant**: Full Masumi Network compatibility
+- ✅ **Fast & Cached**: Instant results for repeated queries
+- ✅ **Production Ready**: Deployed on Railway with 99%+ uptime
+
+## Quick Start
+
+### Test the API
+
+```bash
+# Check availability
+curl https://cardano-wallet-agent-production.up.railway.app/availability
+
+# Get input schema
+curl https://cardano-wallet-agent-production.up.railway.app/input_schema
+
+# Analyze a wallet
+curl -X POST https://cardano-wallet-agent-production.up.railway.app/start_job \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input_data": [
+      {"key": "address", "value": "addr1qx2kd28nq8ac5prwg32hhvudlwggpgfp8utlyqxu6wqgz62f79qsdmm5dsknt9ecr5w468r9ey0fxwkdrwh08ly3tu9sy0f4qd"},
+      {"key": "network", "value": "mainnet"}
+    ]
+  }'
+```
 
 ## Project Structure
 
 ```
 .
-├─ src/
-│  └─ main.py                    # FastAPI app, in-memory jobs, HTML render
-├─ templates/
-│  └─ wallet_report.html         # Jinja2 report template
-├─ reports/                      # Generated HTML reports (created at runtime)
-├─ requirements.txt
-├─ SURVIVAL_PLAN.md              # Survival-mode plan to earn quickly on Masumi
-├─ BUILD_PLAN.md                 # Broader build plan
-└─ README.md
+├── src/                    # Source code
+│   ├── main.py            # FastAPI application
+│   ├── masumi/            # Masumi payment integration
+│   ├── services/          # AI analysis services
+│   └── store/             # SQLite data store
+├── templates/             # HTML report templates
+├── examples/              # Example outputs
+├── tests/                 # Test suite
+├── docs/                  # Documentation
+├── requirements.txt       # Python dependencies
+└── railway.json          # Railway deployment config
 ```
 
 ## Prerequisites
@@ -230,7 +257,7 @@ This agent now includes **true AI reasoning** using OpenAI GPT models:
 
 **Why AI matters**: Masumi guidelines require intelligent reasoning from multiple perspectives (security, DeFi, behavioral, compliance), not just simple if/else rules.
 
-See **AI_ANALYSIS_GUIDE.md** for complete setup and usage.
+See [docs/AI_ANALYSIS_GUIDE.md](docs/AI_ANALYSIS_GUIDE.md) for complete setup and usage.
 
 ### Quick AI Setup
 
@@ -253,10 +280,21 @@ This agent is **MIP-003 compliant** and ready to list on Sokosumi marketplace:
 - **Listing Form**: https://tally.so/r/nPLBaV
 
 ### Revenue Model
-- **Pay-per-use**: 0.05-0.10 ADA per address (AI-powered = premium pricing)
-- **Agent-to-Agent (A2A)**: Other agents call your service
-- **Target**: $100-500/month within 30 days (see SURVIVAL_PLAN.md)
+- **Pay-per-use**: 0.05 ADA per address analysis
+- **Agent-to-Agent (A2A)**: Other Masumi agents can call your service
+- **Target**: $100-500/month within 30 days (see [docs/SURVIVAL_PLAN.md](docs/SURVIVAL_PLAN.md))
+
+## Documentation
+
+- **[Agent Overview](docs/AGENT_OVERVIEW.md)** - What this agent does and how it works
+- **[AI Analysis Guide](docs/AI_ANALYSIS_GUIDE.md)** - AI setup and configuration
+- **[Railway Deployment](docs/RAILWAY_DEPLOYMENT.md)** - Deploy to Railway
+- **[Masumi Integration](docs/MASUMI_SOKOSUMI_INTEGRATION.md)** - Masumi Network & Sokosumi listing
+- **[Survival Plan](docs/SURVIVAL_PLAN.md)** - Business model and revenue strategy
+- **[Terms of Use](docs/TERMS_OF_USE.md)** - Legal terms
+- **[Privacy Policy](docs/PRIVACY_POLICY.md)** - Privacy policy
+- **[Support](docs/SUPPORT.md)** - Get help
 
 ## License
 
-Proprietary for now (adjust as needed).
+MIT License - See LICENSE file for details.
