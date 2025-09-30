@@ -1,0 +1,55 @@
+{
+  "job_id": "9876fedc-ba09-8765-4321-fedcba987654",
+  "status": "completed",
+  "result": {
+    "address": "addr1qz9examplehighriskwallet123suspicious",
+    "network": "mainnet",
+    "balances": {
+      "ada": 12.34,
+      "token_count": 45
+    },
+    "staking": {
+      "delegated": false,
+      "pool_id": null,
+      "since": null
+    },
+    "first_seen": "2025-09-20",
+    "age_days": 10,
+    "tx_velocity_30d": 234,
+    "counterparty_diversity_90d": 0.12,
+    "known_label": null,
+    "top_tokens": [
+      {
+        "asset": "SCAMCOIN",
+        "policy": "suspicious123...",
+        "qty": "999999999"
+      },
+      {
+        "asset": "RUGPULL",
+        "policy": "warning456...",
+        "qty": "50000"
+      }
+    ],
+    "risk_score": 78,
+    "health": "risky",
+    "reasons": [
+      "Very new wallet (10 days) with extremely high transaction velocity (234 tx/30d) is highly suspicious",
+      "Extremely low counterparty diversity (0.12) indicates possible wash trading or self-dealing",
+      "Holdings dominated by tokens with suspicious names and unverified policies",
+      "No staking activity despite high transaction volume suggests short-term exploitation intent",
+      "Activity pattern consistent with known scam wallet behaviors",
+      "Rapid accumulation of numerous low-value tokens typical of airdrop farming or spam"
+    ],
+    "perspectives": {
+      "security": "HIGH RISK. Multiple red flags. New wallet with suspicious activity patterns. Recommend avoiding interaction.",
+      "defi": "CRITICAL RISK. Token holdings include potential scam tokens. No legitimate DeFi participation detected.",
+      "behavioral": "HIGHLY SUSPICIOUS. Extreme velocity with minimal diversity. Pattern matches known malicious actors.",
+      "compliance": "SEVERE CONCERN. Activity consistent with money laundering, wash trading, or scam operations. Report recommended."
+    },
+    "analysis_mode": "openai",
+    "symbol": "ADA",
+    "window_label": "30d",
+    "indicators_summary": "EMA(12/26), MACD, RSI(14)",
+    "report_path": "/app/reports/9876fedc-ba09-8765-4321-fedcba987654.html"
+  }
+}

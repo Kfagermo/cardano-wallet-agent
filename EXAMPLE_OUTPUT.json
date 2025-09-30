@@ -1,0 +1,53 @@
+{
+  "job_id": "f5ede82c-d00e-4e70-8bcc-eed97d468e6c",
+  "status": "completed",
+  "result": {
+    "address": "addr1qx2kd28nq8ac5prwg32hhvudlwggpgfp8utlyqxu6wqgz62f79qsdmm5dsknt9ecr5w468r9ey0fxwkdrwh08ly3tu9sy0f4qd",
+    "network": "mainnet",
+    "balances": {
+      "ada": 1543.21,
+      "token_count": 3
+    },
+    "staking": {
+      "delegated": true,
+      "pool_id": "pool1xyz",
+      "since": "2023-11-01"
+    },
+    "first_seen": "2023-01-01",
+    "age_days": 682,
+    "tx_velocity_30d": 14,
+    "counterparty_diversity_90d": 0.72,
+    "known_label": "exchange",
+    "top_tokens": [
+      {
+        "asset": "TOKEN",
+        "policy": "abcd...",
+        "qty": "1000"
+      },
+      {
+        "asset": "XYZ",
+        "policy": "ef01...",
+        "qty": "250"
+      }
+    ],
+    "risk_score": 23,
+    "health": "safe",
+    "reasons": [
+      "Wallet demonstrates stable staking behavior for 682 days, indicating long-term commitment to the network",
+      "High counterparty diversity (0.72) suggests healthy ecosystem participation rather than isolated activity",
+      "Moderate transaction velocity (14 tx/30d) is typical for active holders and not indicative of bot behavior",
+      "Known label 'exchange' adds credibility and reduces risk of malicious activity"
+    ],
+    "perspectives": {
+      "security": "Low risk. No suspicious patterns or known malicious associations detected.",
+      "defi": "Minimal DeFi exposure. Staking is low-risk activity. Token holdings appear standard.",
+      "behavioral": "Healthy behavior. Consistent staking, moderate activity, diverse counterparties.",
+      "compliance": "Low concern. Exchange label suggests regulated entity. No mixing service indicators."
+    },
+    "analysis_mode": "openai",
+    "symbol": "ADA",
+    "window_label": "30d",
+    "indicators_summary": "EMA(12/26), MACD, RSI(14)",
+    "report_path": "/app/reports/f5ede82c-d00e-4e70-8bcc-eed97d468e6c.html"
+  }
+}
