@@ -1,0 +1,29 @@
+{
+  "address": "addr1qriskyaddress",
+  "network": "preprod",
+  "balances": {
+    "ada": 25.0,
+    "token_count": 0
+  },
+  "staking": {
+    "delegated": false,
+    "pool_id": null,
+    "since": null
+  },
+  "first_seen": "2025-09-01",
+  "age_days": 10,
+  "tx_velocity_30d": 120,
+  "counterparty_diversity_90d": 0.1,
+  "known_label": null,
+  "top_tokens": [],
+  "risk_score": 76,
+  "health": "risky",
+  "reasons": [
+    "new address (<30 days)",
+    "very high recent tx velocity",
+    "low counterparty diversity"
+  ],
+  "symbol": "ADA",
+  "window_label": "30d",
+  "indicators_summary": "EMA(12/26), MACD, RSI(14)"
+}

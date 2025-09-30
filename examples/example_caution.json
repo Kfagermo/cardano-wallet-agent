@@ -1,0 +1,33 @@
+{
+  "address": "addr1qmidaddress",
+  "network": "preprod",
+  "balances": {
+    "ada": 322.12,
+    "token_count": 1
+  },
+  "staking": {
+    "delegated": false,
+    "pool_id": null,
+    "since": null
+  },
+  "first_seen": "2024-01-01",
+  "age_days": 150,
+  "tx_velocity_30d": 14,
+  "counterparty_diversity_90d": 0.5,
+  "known_label": null,
+  "top_tokens": [
+    {
+      "asset": "MID",
+      "policy": "12ab...",
+      "qty": "50"
+    }
+  ],
+  "risk_score": 50,
+  "health": "caution",
+  "reasons": [
+    "no special risk factors identified"
+  ],
+  "symbol": "ADA",
+  "window_label": "30d",
+  "indicators_summary": "EMA(12/26), MACD, RSI(14)"
+}

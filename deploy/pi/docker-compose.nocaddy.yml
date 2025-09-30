@@ -1,0 +1,40 @@
+version: "3.9"
+
+# Run ONLY the wallet-agent on the new Pi and let your existing Pi (already on 80/443)
+# reverse proxy crypto.esense.no to this Pi over your LAN.
+#
+# On the new Pi (this repo):
+#   cd deploy/pi
+#   cp .env.production.example .env.production  # fill values
+#   docker compose -f docker-compose.nocaddy.yml up -d
+#
+# On the existing Pi (gateway with 80/443 & TLS):
+#   Add a vhost for crypto.esense.no that reverse_proxies to http://NEW_PI_LAN_IP:8000
+#   (see example Caddy/Nginx snippets in DEPLOYMENT_PI.md)
+#
+# Pros:
+# - No 80/443 port-forwarding required for this new Pi
+# - Keeps TLS termination and public exposure on your existing gateway Pi
+
+services:
+  wallet-agent:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: wallet-agent
+    restart: unless-stopped
+    env_file:
+      - ./.env.production
+    environment:
+      - MASUMI_BYPASS_PAYMENTS=false
+      - RATE_LIMIT_RPM=60
+      - LOG_LEVEL=INFO
+      - CACHE_TTL_SEC=86400
+      - IDEMPOTENCY_WINDOW_SEC=600
+    ports:
+      - "8000:8000"  # expose locally so the gateway proxy can reach it
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/availability"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

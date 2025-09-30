@@ -1,0 +1,42 @@
+{
+  "address": "addr1qxyzdemoaddress",
+  "network": "preprod",
+  "balances": {
+    "ada": 1543.21,
+    "token_count": 3
+  },
+  "staking": {
+    "delegated": true,
+    "pool_id": "pool1xyz",
+    "since": "2023-11-01"
+  },
+  "first_seen": "2023-01-01",
+  "age_days": 400,
+  "tx_velocity_30d": 2,
+  "counterparty_diversity_90d": 0.75,
+  "known_label": "exchange",
+  "top_tokens": [
+    {
+      "asset": "TOKEN",
+      "policy": "abcd...",
+      "qty": "1000"
+    },
+    {
+      "asset": "XYZ",
+      "policy": "ef01...",
+      "qty": "250"
+    }
+  ],
+  "risk_score": 17,
+  "health": "safe",
+  "reasons": [
+    "address is older than 1 year",
+    "delegated/staked ADA adds stability",
+    "low recent tx activity",
+    "diverse counterparties",
+    "known label: exchange"
+  ],
+  "symbol": "ADA",
+  "window_label": "30d",
+  "indicators_summary": "EMA(12/26), MACD, RSI(14)"
+}

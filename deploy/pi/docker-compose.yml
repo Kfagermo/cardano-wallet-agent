@@ -1,0 +1,69 @@
+version: "3.9"
+
+# Raspberry Pi (ARM) deployment with Caddy reverse proxy + TLS
+# - wallet-agent: FastAPI service (builds local image from repo root Dockerfile)
+# - caddy: HTTPS termination + reverse proxy to wallet-agent:8000
+#
+# Steps (on the Pi):
+# 1) Copy this repo to the Pi (e.g., via git clone or rsync)
+# 2) cd deploy/pi
+# 3) cp .env.production.example .env.production  (fill in values)
+# 4) Edit Caddyfile and replace YOUR_DOMAIN with your domain (or keep :80 for local/LAN)
+# 5) docker compose up -d
+#
+# Data persistence:
+# - SQLite DB stored in named volume wallet_data (mounted at /app/data)
+# - Reports stored in named volume wallet_reports (mounted at /app/reports)
+
+services:
+  wallet-agent:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: wallet-agent
+    restart: unless-stopped
+    env_file:
+      - ./.env.production
+    environment:
+      # Safe defaults; can be overridden in .env.production
+      - MASUMI_BYPASS_PAYMENTS=false
+      - RATE_LIMIT_RPM=60
+      - LOG_LEVEL=INFO
+      - CACHE_TTL_SEC=86400
+      - IDEMPOTENCY_WINDOW_SEC=600
+    volumes:
+      - wallet_data:/app/data
+      - wallet_reports:/app/reports
+    networks:
+      - web
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/availability"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  caddy:
+    image: caddy:2.7-alpine
+    container_name: caddy
+    restart: unless-stopped
+    depends_on:
+      - wallet-agent
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_config:/config
+      - caddy_data:/data
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  wallet_data:
+  wallet_reports:
+  caddy_config:
+  caddy_data:

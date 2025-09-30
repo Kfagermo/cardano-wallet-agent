@@ -1,0 +1,55 @@
+version: "3.9"
+
+# Expose the agent via Cloudflare Tunnel (no router port-forwarding; keeps other Pi on 80/443).
+# Requirements:
+# - A Cloudflare account managing your zone (e.g., esense.no)
+# - Create a Tunnel in Cloudflare Dashboard and obtain a TUNNEL TOKEN
+# - Create a proxied DNS record (orange cloud) for your hostname (e.g., crypto.esense.no)
+#
+# Steps:
+# 1) cd deploy/pi
+# 2) cp .env.tunnel.example .env.tunnel  (paste your CLOUDFLARE_TUNNEL_TOKEN and HOSTNAME)
+# 3) docker compose -f docker-compose.tunnel.yml up -d
+#
+# This will run the app locally and expose it securely through Cloudflare's network,
+# so you don't need ports 80/443 on your router for this Pi.
+
+services:
+  wallet-agent:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: wallet-agent
+    restart: unless-stopped
+    env_file:
+      - ./.env.production
+    environment:
+      - MASUMI_BYPASS_PAYMENTS=false
+      - RATE_LIMIT_RPM=60
+      - LOG_LEVEL=INFO
+      - CACHE_TTL_SEC=86400
+      - IDEMPOTENCY_WINDOW_SEC=600
+    networks:
+      - web
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/availability"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    depends_on:
+      - wallet-agent
+    env_file:
+      - ./.env.tunnel
+    # TUNNEL TOKEN mode; Cloudflare manages config. Provide CLOUDFLARE_TUNNEL_TOKEN in .env.tunnel.
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
