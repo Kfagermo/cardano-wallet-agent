@@ -1,0 +1,120 @@
+═══════════════════════════════════════════════════════════════
+  RAILWAY VARIABLES CHECKLIST - Copy/Paste into Railway UI
+═══════════════════════════════════════════════════════════════
+
+🔗 Railway Dashboard: 
+   https://railway.com/project/aa6a16f9-9f6e-4ebc-a90c-aea8fd5f288f
+   → Click "cardano-wallet-agent" 
+   → Click "Variables" tab
+   → Click "+ New Variable" for each
+
+───────────────────────────────────────────────────────────────
+✅ ALREADY SET (Don't add these again)
+───────────────────────────────────────────────────────────────
+☑ MASUMI_BYPASS_PAYMENTS = true
+☑ NETWORK = mainnet
+☑ BLOCKFROST_PROJECT_ID = mainnetzD5WcmBu56UNEEXRjQHh0LByan0KYtVt
+☑ AI_ANALYSIS_MODE = deterministic
+☑ LOG_LEVEL = INFO
+
+───────────────────────────────────────────────────────────────
+🤖 ADD FOR AI ANALYSIS (Recommended - Do First!)
+───────────────────────────────────────────────────────────────
+
+□ Variable: OPENAI_API_KEY
+  Value: sk-proj-_________________________________
+  Get from: https://platform.openai.com/api-keys
+
+□ Variable: AI_ANALYSIS_MODE
+  Value: openai
+  (Change from "deterministic" to "openai")
+
+───────────────────────────────────────────────────────────────
+💰 ADD FOR PAYMENT INTEGRATION (When Ready for Production)
+───────────────────────────────────────────────────────────────
+
+□ Variable: MASUMI_BYPASS_PAYMENTS
+  Value: false
+  (Change from "true" to "false")
+
+□ Variable: MASUMI_PAYMENT_SERVICE_URL
+  Value: https://masumi-payment-service-production.up.railway.app/api/v1
+  Get from: Railway → masumi-payment-service → Settings → Domains
+  NOTE: Must end with /api/v1
+
+□ Variable: MASUMI_API_KEY
+  Value: _________________________________
+  Get from: Your Masumi Payment Service setup
+
+□ Variable: SELLER_VKEY
+  Value: _________________________________
+  Get from: Your Cardano wallet verification key
+
+───────────────────────────────────────────────────────────────
+⚙️ OPTIONAL TUNING (Add if needed)
+───────────────────────────────────────────────────────────────
+
+□ Variable: PRICE_PER_ADDRESS_ADA
+  Value: 0.05
+  (Recommended with AI analysis)
+
+□ Variable: CACHE_TTL_SEC
+  Value: 86400
+  (24 hours - default is good)
+
+□ Variable: MASUMI_PAYMENT_TIMEOUT_SEC
+  Value: 600
+  (10 minutes - default is good)
+
+□ Variable: RATE_LIMIT_RPM
+  Value: 60
+  (Increase to 120 if needed)
+
+───────────────────────────────────────────────────────────────
+📝 NOTES
+───────────────────────────────────────────────────────────────
+
+• Railway automatically redeploys when you add variables (1-2 min)
+• Test after adding: curl https://cardano-wallet-agent-production.up.railway.app/
+• Check AI enabled: Look for "ai": {"mode": "openai", "enabled": true}
+• Variables are case-sensitive!
+• URLs must include https:// and /api/v1
+
+───────────────────────────────────────────────────────────────
+🎯 QUICK START (Minimum to get AI working)
+───────────────────────────────────────────────────────────────
+
+1. Get OpenAI key: https://platform.openai.com/api-keys
+2. Add OPENAI_API_KEY = sk-proj-your_key
+3. Change AI_ANALYSIS_MODE = openai
+4. Wait 2 minutes for redeploy
+5. Test: curl https://cardano-wallet-agent-production.up.railway.app/
+
+───────────────────────────────────────────────────────────────
+✅ VERIFICATION
+───────────────────────────────────────────────────────────────
+
+After adding variables, verify they're set:
+
+Via CLI:
+  railway variables
+
+Via API:
+  curl https://cardano-wallet-agent-production.up.railway.app/
+  
+Look for:
+  "ai": {
+    "mode": "openai",
+    "enabled": true
+  }
+
+───────────────────────────────────────────────────────────────
+🚀 READY TO LAUNCH!
+───────────────────────────────────────────────────────────────
+
+Once variables are set:
+1. Test wallet analysis with AI
+2. List on Sokosumi: https://tally.so/r/nPLBaV
+3. Start earning ADA!
+
+═══════════════════════════════════════════════════════════════

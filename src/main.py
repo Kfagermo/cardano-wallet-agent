@@ -342,6 +342,43 @@ def status(job_id: str) -> Dict[str, Any]:
     }
 
 
+class ProvideInputPayload(BaseModel):
+    job_id: str = Field(..., description="Job ID to provide input for")
+    input_data: Dict[str, Any] = Field(..., description="Additional input data")
+
+
+@app.post("/provide_input")
+async def provide_input(payload: ProvideInputPayload = Body(...)) -> Dict[str, str]:
+    """
+    MIP-003 required endpoint: Allows providing additional input for jobs in 'awaiting_input' status.
+    
+    Note: This wallet analysis agent doesn't currently use multi-step input,
+    but this endpoint is required for MIP-003 compliance.
+    """
+    job_id = payload.job_id
+    job = get_job(job_id)
+    
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    
+    job_status = job.get("status", "")
+    
+    # For this agent, we don't use awaiting_input status, but we need to handle it per MIP-003
+    if job_status != "awaiting_input":
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Job is not awaiting input (current status: {job_status})"
+        )
+    
+    log_event("provide_input_received", job_id=job_id, input_data=payload.input_data)
+    
+    # In a more complex agent, you would process the additional input here
+    # For this wallet analysis agent, we don't need multi-step input
+    # But we return success to maintain MIP-003 compliance
+    
+    return {"status": "success"}
+
+
 # --- Internal processing ---
 
 
