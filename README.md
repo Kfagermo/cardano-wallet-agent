@@ -26,7 +26,7 @@ For AI agents and developers:
 - ✅ **Multi-Perspective**: Security, DeFi, Behavioral, Compliance analysis
 - ✅ **Real-Time Data**: Blockfrost integration for on-chain data
 - ✅ **MIP-003 Compliant**: Full Masumi Network compatibility
-- ✅ **Fast & Cached**: Instant results for repeated queries
+- ✅ **Fast Response**: 1-3 seconds for comprehensive analysis
 - ✅ **Reliable**: 99%+ uptime on Railway infrastructure
 
 ## What You Get
